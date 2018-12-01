@@ -6,6 +6,7 @@
 #include "cities.hh"
 #include "chromosome.hh"
 #include "deme.hh"
+#include "climb_chromosome.hh"
 
 #include <algorithm>
 #include <cassert>
