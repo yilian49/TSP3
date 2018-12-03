@@ -125,7 +125,7 @@ ClimbChromosome::create_crossover_child(const ClimbChromosome* p1, const ClimbCh
 
 bool operator==(const ClimbChromosome c1, const ClimbChromosome c2)
 {
-	if (c1.get_order() == c2.get_order())
+	if (c1.get_ordering() == c2.get_ordering())
 	{
 		return true;
 	}

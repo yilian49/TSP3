@@ -26,6 +26,7 @@ bool is_improved(const Cities& cities,
                  uint64_t iter)
 {
   const auto dist = cities.total_path_distance(ordering);
+  std::cout << dist<< std::endl;
   if (dist < best_dist) {
     std::cout << iter << "\t" << dist << std::endl;
     best_dist = dist;
@@ -97,8 +98,9 @@ Cities::permutation_t ga_search(const Cities& cities,
   // Evolve the population to make it fitter and keep track of
   // the shortest distance generated
   for (long i = 1; i <= iters/pop_size; ++i) {
+    std::cout<<"computinging "<<i<<std::endl;
     deme.compute_next_generation();    // generate next generation
-
+    std::cout<<i<<"computed";
     // Find best individual in this population
     const auto ordering = deme.get_best()->get_ordering();
     if (is_improved(cities, ordering, best_dist, i * pop_size)) {
@@ -120,7 +122,7 @@ int main(int argc, char** argv)
   const auto cities = Cities(argv[1]);
   const auto pop_size = atoi(argv[2]);
   const auto mut_rate = atof(argv[3]);
-  constexpr unsigned NUM_ITER = 100000;
+  constexpr unsigned NUM_ITER = 1000;
 
 
 //  const auto best_ordering = exhaustive_search(cities);

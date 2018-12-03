@@ -15,8 +15,6 @@ public:
 	ClimbChromosome(const Cities*);
 
 
-	Cities::permutation_t get_order() const
-	{	return order_;}
 protected:
 	ClimbChromosome*
 		create_crossover_child(

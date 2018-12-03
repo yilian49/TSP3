@@ -23,6 +23,7 @@ Deme::Deme(const Cities* cities_ptr, unsigned pop_size, double mut_rate)
   for (auto& cp : pop_) {
     cp = new ClimbChromosome(cities_ptr);
   }
+
 }
 
 // Clean up as necessary
