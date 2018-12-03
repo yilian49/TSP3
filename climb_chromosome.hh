@@ -5,7 +5,10 @@
 
 class ClimbChromosome : public Chromosome
 {
-
+//protected:
+//	ClimbChromosome& operator==(const ClimbChromosome&)
+//	{
+//		if (ClimbChromosome const 
 public:
 	void mutate() override;
 	ClimbChromosome* clone() const override;		

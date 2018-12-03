@@ -11,6 +11,4 @@ public:
     
     ClimbChromosome* select_parent() override;
 
-
-
 };

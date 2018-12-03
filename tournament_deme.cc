@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 TournamentDeme::TournamentDeme(const Cities* cities_ptr, unsigned pop_size, double mut_rate)
- : pop_(pop_size), mut_rate_(mut_rate), generator_(0)
+: Deme( cities_ptr, pop_size, mut_rate)
 {
   // Create random ClimbChromosomes and put into population vector
   for (auto& cp : pop_) {
@@ -32,7 +32,7 @@ ClimbChromosome*
 TournamentDeme::select_parent(){
 
     std::vector<ClimbChromosome> chosen_ones;
-    int P = 8;
+    long unsigned int P = 8;
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
@@ -47,7 +47,7 @@ TournamentDeme::select_parent(){
         // if it is, do nothing and repeat the loop
         // until the list is full
         if(std::find(chosen_ones.begin(), chosen_ones.end(), pop_[rand_gen]) == chosen_ones.end()) {
-            chosen_ones.push_back(pop_[rand_gen]);
+            chosen_ones.push_back(*pop_[rand_gen]);
         } 
     }
 
@@ -56,7 +56,7 @@ TournamentDeme::select_parent(){
 
     while(chosen_ones.size() > 1){
         for(unsigned long int i=0; i<chosen_ones.size(); i+=2){
-            if(chosen_ones[i]->get_fitness() > chosen_ones[i+1] -> get_fitness()){
+            if(chosen_ones[i].get_fitness() > chosen_ones[i+1].get_fitness()){
                 chosen_ones.erase(chosen_ones.begin()+i+1);
             }
             else{
@@ -65,5 +65,5 @@ TournamentDeme::select_parent(){
         }
     }
 
-    return *(chosen_ones[0]);           //Return pointer to ClimbChromosome
+    return (&chosen_ones[0]);           //Return pointer to ClimbChromosome
 }
