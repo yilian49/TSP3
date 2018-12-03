@@ -66,7 +66,7 @@ TournamentDeme::select_parent() {
         }
 	
     std::cout<<"chosen ones size:"<< chosen_ones.size()<<std::endl;
-	if (chosen_ones.size() == 2)
+/*	if (chosen_ones.size() == 2)
 	{
 		std::cout<<"computing last state";	
             if(chosen_ones[0].get_fitness() > chosen_ones[1].get_fitness()){
@@ -78,6 +78,16 @@ TournamentDeme::select_parent() {
     
 	}
 	}
+  */}
+    chosen_ones[0].mutate();
+    if (chosen_ones[0].get_valid())
+{
+	std::cout<<"parent is valid"<<"\n";
+}
+else
+{
+	std::cout<<"not valid!!!\n";
+}
     std::cout<<"parent selected";
     return (&chosen_ones[0]);           //Return pointer to ClimbChromosome
 }

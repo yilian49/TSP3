@@ -14,6 +14,8 @@ public:
 	
 	ClimbChromosome(const Cities*);
 
+	bool get_valid()
+	{ return is_valid();}
 
 protected:
 	ClimbChromosome*

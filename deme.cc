@@ -12,6 +12,7 @@
 #include <cassert>
 #include <numeric>
 #include <random>
+#include <iostream>
 
 //////////////////////////////////////////////////////////////////////////////
 // Generate a Deme of the specified size with all-random chromosomes.
@@ -50,15 +51,21 @@ void Deme::compute_next_generation()
   for (unsigned i = 0; i < pop_.size(); ) {
     auto p1 = select_parent();
     auto p2 = select_parent();
+    
+    std::cout<<"parents selection complete";
+    std::cout<<"\n";
 
     static std::uniform_real_distribution<> dist(0.0, 1.0);
     if (dist(generator_) <= mut_rate_) {
       p1->mutate();
+      std::cout<<"p1 mutated"<<std::endl;
     }
     if (dist(generator_) <= mut_rate_) {
       p2->mutate();
+      std::cout<<"p2 mutated"<< std::endl;
+      std::cout<<"\n";
     }
-
+    std::cout<<"parents mutated \n";
     auto children = p1->recombine(p2);
     newpop[i++] = children.first;
     newpop[i++] = children.second;
