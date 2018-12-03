@@ -118,3 +118,20 @@ ClimbChromosome::create_crossover_child(const ClimbChromosome* p1, const ClimbCh
   assert(child->is_valid());
   return child;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Overloading the == operator for comparing climbchromosomes
+//
+
+bool operator==(const ClimbChromosome c1, const ClimbChromosome c2)
+{
+	if (c1.get_order() == c2.get_order())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+

@@ -5,10 +5,6 @@
 
 class ClimbChromosome : public Chromosome
 {
-//protected:
-//	ClimbChromosome& operator==(const ClimbChromosome&)
-//	{
-//		if (ClimbChromosome const 
 public:
 	void mutate() override;
 	ClimbChromosome* clone() const override;		
@@ -18,6 +14,9 @@ public:
 	
 	ClimbChromosome(const Cities*);
 
+
+	Cities::permutation_t get_order() const
+	{	return order_;}
 protected:
 	ClimbChromosome*
 		create_crossover_child(
@@ -27,3 +26,6 @@ protected:
 				unsigned end) const ;
 
 };
+
+
+bool operator==(const ClimbChromosome c1, const ClimbChromosome c2);

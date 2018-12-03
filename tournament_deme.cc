@@ -46,8 +46,12 @@ TournamentDeme::select_parent(){
         // if it is not, add it to the list
         // if it is, do nothing and repeat the loop
         // until the list is full
-        if(std::find(chosen_ones.begin(), chosen_ones.end(), pop_[rand_gen]) == chosen_ones.end()) {
-            chosen_ones.push_back(*pop_[rand_gen]);
+//	ClimbChromosome const find_object = *(std::find(chosen_ones.begin(), chosen_ones.end(), *pop_[rand_gen]));
+//	ClimbChromosome const end_object = *(chosen_ones.end());
+//	if (find_object == end_object)
+        if((std::find(chosen_ones.begin(), chosen_ones.end(), *pop_[rand_gen])) == (chosen_ones.end())) 
+	{
+   		chosen_ones.push_back(*pop_[rand_gen]);
         } 
     }
 
