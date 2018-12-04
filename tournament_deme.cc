@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <numeric>
 #include <iostream>
-
+#include <list>
+#include <cassert>
 ///////////////////////////////////////////////////////////////////////////////////////
 
 TournamentDeme::TournamentDeme(const Cities* cities_ptr, unsigned pop_size, double mut_rate)
@@ -29,7 +30,7 @@ TournamentDeme::~TournamentDeme()
 ClimbChromosome*
 TournamentDeme::select_parent() {
 
-    std::vector<ClimbChromosome> chosen_ones;
+    std::vector<ClimbChromosome*> chosen_ones;
     long unsigned int P = 8;
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -44,50 +45,25 @@ TournamentDeme::select_parent() {
         // if it is not, add it to the list
         // if it is, do nothing and repeat the loop
         // until the list is full
-        if((std::find(chosen_ones.begin(), chosen_ones.end(), *pop_[rand_gen])) == (chosen_ones.end())) 
+        if((std::find(chosen_ones.begin(), chosen_ones.end(), pop_[rand_gen])) == (chosen_ones.end())) 
 	{
-   		chosen_ones.push_back(*pop_[rand_gen]);
+   		chosen_ones.push_back(pop_[rand_gen]);
         } 
     }
 
-        /*Loop that removes lower fitness elements by comparing pairs
-        of ClimbChromosomes until only one parent left*/
-    std::cout<<"chosen ones size:"<< chosen_ones.size()<<std::endl;
+        //Loop that removes lower fitness elements by comparing pairs
+        //of ClimbChromosomes until only one parent left
     while(chosen_ones.size() > 1){
         for(unsigned long int i=0; i<chosen_ones.size()-1; i+=2){
-            if(chosen_ones[i].get_fitness() > chosen_ones[i+1].get_fitness()){
+            if(chosen_ones[i]->get_fitness() > chosen_ones[i+1]->get_fitness()){
                 chosen_ones.erase(chosen_ones.begin()+i+1);
-		std::cout<<i+1<<" deleted \n";
 	    }
             else{
                 chosen_ones.erase(chosen_ones.begin()+i);
-		std::cout<<i<<"deleted \n";
             }
         }
 	
-    std::cout<<"chosen ones size:"<< chosen_ones.size()<<std::endl;
-/*	if (chosen_ones.size() == 2)
-	{
-		std::cout<<"computing last state";	
-            if(chosen_ones[0].get_fitness() > chosen_ones[1].get_fitness()){
-                chosen_ones.erase(chosen_ones.begin()+1);
-            }
-            else{
-                chosen_ones.erase(chosen_ones.begin());
-            }
-    
-	}
-	}
-  */}
-    chosen_ones[0].mutate();
-    if (chosen_ones[0].get_valid())
-{
-	std::cout<<"parent is valid"<<"\n";
+
 }
-else
-{
-	std::cout<<"not valid!!!\n";
-}
-    std::cout<<"parent selected";
-    return (&chosen_ones[0]);           //Return pointer to ClimbChromosome
+    return chosen_ones.front();           //Return pointer to ClimbChromosome
 }
