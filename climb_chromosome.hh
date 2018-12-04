@@ -5,7 +5,6 @@
 
 class ClimbChromosome : public Chromosome
 {
-
 public:
 	void mutate() override;
 	ClimbChromosome* clone() const override;		
@@ -14,6 +13,9 @@ public:
 		recombine(const ClimbChromosome* other);
 	
 	ClimbChromosome(const Cities*);
+
+	bool get_valid()
+	{ return is_valid();}
 
 protected:
 	ClimbChromosome*
@@ -24,3 +26,6 @@ protected:
 				unsigned end) const ;
 
 };
+
+
+bool operator==(const ClimbChromosome c1, const ClimbChromosome c2);

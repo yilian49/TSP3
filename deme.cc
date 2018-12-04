@@ -12,6 +12,7 @@
 #include <cassert>
 #include <numeric>
 #include <random>
+#include <iostream>
 
 //////////////////////////////////////////////////////////////////////////////
 // Generate a Deme of the specified size with all-random chromosomes.
@@ -23,6 +24,7 @@ Deme::Deme(const Cities* cities_ptr, unsigned pop_size, double mut_rate)
   for (auto& cp : pop_) {
     cp = new ClimbChromosome(cities_ptr);
   }
+
 }
 
 // Clean up as necessary
@@ -49,6 +51,7 @@ void Deme::compute_next_generation()
   for (unsigned i = 0; i < pop_.size(); ) {
     auto p1 = select_parent();
     auto p2 = select_parent();
+    
 
     static std::uniform_real_distribution<> dist(0.0, 1.0);
     if (dist(generator_) <= mut_rate_) {
@@ -57,7 +60,6 @@ void Deme::compute_next_generation()
     if (dist(generator_) <= mut_rate_) {
       p2->mutate();
     }
-
     auto children = p1->recombine(p2);
     newpop[i++] = children.first;
     newpop[i++] = children.second;
